@@ -1,0 +1,43 @@
+src\com\shopping\Main.java:58: error: incompatible types: ProductManager cannot be converted to ProductDAO
+        OrderProcessor processor = new OrderProcessor(manager);
+                                                      ^
+src\com\shopping\Main.java:64: error: method checkout in class OrderProcessor cannot be applied to given types;
+        processor.checkout(cart, "Jane Customer");
+                 ^
+  required: ShoppingCart,int,String
+  found:    ShoppingCart,String
+  reason: actual and formal argument lists differ in length
+src\com\shopping\Main.java:67: error: cannot find symbol
+        processor.readAndDisplayPastOrders();
+                 ^
+  symbol:   method readAndDisplayPastOrders()
+  location: variable processor of type OrderProcessor
+src\com\shopping\gui\ShoppingGUI.java:176: error: cannot find symbol
+            if (shoppingCart.getItems().isEmpty()) {
+                                       ^
+  symbol:   method isEmpty()
+  location: class CustomLinkedList<CartItem>
+src\com\shopping\gui\ShoppingGUI.java:239: error: constructor OutOfStockException in class OutOfStockException cannot be applied to given types;
+                         throw new OutOfStockException("Not enough stock.");
+                               ^
+  required: String,int,int
+  found:    String
+  reason: actual and formal argument lists differ in length
+src\com\shopping\gui\ShoppingGUI.java:246: error: cannot find symbol
+                            cartItem.setQuantity(currentCartQty + 1);
+                                    ^
+  symbol:   method setQuantity(int)
+  location: variable cartItem of type CartItem
+src\com\shopping\gui\ShoppingGUI.java:255: error: cannot find symbol
+                        shoppingCart.getItems().add(new CartItem(latest, 1));
+                                               ^
+  symbol:   method add(CartItem)
+  location: class CustomLinkedList<CartItem>
+src\com\shopping\order\OrderProcessor.java:42: error: constructor OutOfStockException in class OutOfStockException cannot be applied to given types;
+                    throw new OutOfStockException("Insufficient stock for " + item.getProduct().getName());
+                          ^
+  required: String,int,int
+  found:    String
+  reason: actual and formal argument lists differ in length
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+8 errors
