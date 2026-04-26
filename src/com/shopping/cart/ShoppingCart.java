@@ -1,7 +1,6 @@
 package com.shopping.cart;
 
 import com.shopping.dao.ProductDAO;
-import com.shopping.discount.DiscountStrategy;
 import com.shopping.model.Product;
 import com.shopping.util.CustomLinkedList;
 
@@ -13,7 +12,7 @@ public class ShoppingCart {
 
     private final CustomLinkedList<CartItem> items;
     private final ProductDAO productDAO;
-    private DiscountStrategy discountStrategy;
+    private double discountPercent = 0.0;
 
     public ShoppingCart(ProductDAO productDAO) {
         // Intentionally avoiding built-in ArrayList or LinkedList
@@ -126,10 +125,10 @@ public class ShoppingCart {
     }
 
     /**
-     * Sets the active discount strategy for the cart.
+     * Sets the active discount percentage for the cart.
      */
-    public void setDiscountStrategy(DiscountStrategy discountStrategy) {
-        this.discountStrategy = discountStrategy;
+    public void setDiscountPercent(double discountPercent) {
+        this.discountPercent = discountPercent;
     }
 
     /**
@@ -140,8 +139,8 @@ public class ShoppingCart {
      */
     public double calculateTotal() {
         double subtotal = calculateSubtotal();
-        if (discountStrategy != null) {
-            return discountStrategy.applyDiscount(subtotal);
+        if (discountPercent > 0) {
+            return subtotal * (1.0 - (discountPercent / 100.0));
         }
         return subtotal;
     }
@@ -164,8 +163,8 @@ public class ShoppingCart {
             double total = calculateTotal();
             System.out.println("+------------------------------------------------------+");
             System.out.printf("| SUBTOTAL: $%.2f%n", subtotal);
-            if (discountStrategy != null) {
-                System.out.printf("| DISCOUNT APPLIED: -$%.2f%n", (subtotal - total));
+            if (discountPercent > 0) {
+                System.out.printf("| DISCOUNT APPLIED (%s%%): -$%.2f%n", discountPercent, (subtotal - total));
             }
             System.out.printf("| TOTAL ESTIMATE: $%.2f%n", total);
         }

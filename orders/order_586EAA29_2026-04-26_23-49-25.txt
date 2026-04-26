@@ -1,0 +1,26 @@
+============================================
+          TOOLSHOP PRO — ORDER RECORD
+============================================
+ Order ID  : 586eaa29-d7e1-44a7-aaa8-7ef241a5a95f
+ Customer  : shopper
+ Date/Time : 2026-04-26 23:49:25
+--------------------------------------------
+ ITEM                      QTY     AMOUNT
+--------------------------------------------
+ Drill Bit Set HSS           2     $49.98
+   @ $24.99 each
+ Safety Goggle Pro           2     $13.98
+   @ $6.99 each
+ Heat Gun 1500W              3     $98.97
+   @ $32.99 each
+ Clamp Set 6-Pack            3     $56.97
+   @ $18.99 each
+ Caulking Gun Pro            2     $22.98
+   @ $11.49 each
+ Spirit Level 24in           2     $33.98
+   @ $16.99 each
+ Impact Driver 18V           2    $199.98
+   @ $99.99 each
+--------------------------------------------
+ TOTAL:                            $238.42
+============================================

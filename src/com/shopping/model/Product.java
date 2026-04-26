@@ -4,8 +4,7 @@ package com.shopping.model;
  * Abstract base class for every item in the product catalog.
  *
  * <p><b>Encapsulation:</b> All fields are {@code private}; access is
- * controlled through getters (and a package-private stock setter used
- * only by {@link com.shopping.catalog.ProductManager}).</p>
+ * controlled through getters and setters.</p>
  *
  * <p><b>Polymorphism:</b> Subclasses <em>must</em> override
  * {@link #displayDetails()} to present their own unique attributes.</p>
@@ -92,13 +91,6 @@ public abstract class Product {
 
     /**
      * Sets the stock quantity directly.
-     *
-     * <p><b>Important:</b> This method is intentionally {@code public} so
-     * that {@link com.shopping.catalog.ProductManager} (which lives in a
-     * different package) can update stock after performing its own
-     * validation.  Client code should <em>always</em> go through
-     * {@code ProductManager.decreaseStock()} rather than calling this
-     * method directly.</p>
      *
      * @param stockQuantity new stock level (must be ≥ 0)
      * @throws IllegalArgumentException if the value is negative

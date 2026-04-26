@@ -1,7 +1,5 @@
 package com.shopping.dao;
 
-import com.shopping.model.DigitalProduct;
-import com.shopping.model.PerishableProduct;
 import com.shopping.model.PhysicalProduct;
 import com.shopping.model.Product;
 import com.shopping.util.DatabaseConnection;
@@ -41,12 +39,8 @@ public class ProductDAO {
         Product product;
         if ("PhysicalProduct".equals(type)) {
             product = new PhysicalProduct(id, name, price, stock, 1.0, extraAttr != null ? extraAttr : "");
-        } else if ("DigitalProduct".equals(type)) {
-            product = new DigitalProduct(id, name, price, stock, extraAttr != null ? extraAttr : "", 5.0);
-        } else if ("PerishableProduct".equals(type)) {
-            product = new PerishableProduct(id, name, price, stock, LocalDate.now().plusDays(10), 0.0);
         } else {
-            product = new PhysicalProduct(id, name, price, stock, 1.0, ""); 
+            product = new PhysicalProduct(id, name, price, stock, 1.0, "");
         }
         product.setImagePath(imagePath);
         return product;
@@ -57,7 +51,7 @@ public class ProductDAO {
         String query = "SELECT id, name, type, price, stock, extra_attributes, image_path FROM Products ORDER BY id";
 
         try (PreparedStatement stmt = connection.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+                ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Product product = mapResultSetToProduct(rs);
                 products.put(product.getId(), product);
@@ -69,7 +63,8 @@ public class ProductDAO {
     }
 
     /**
-     * Executes SELECT ... FOR UPDATE enforcing row-level Mutex Locking inside a transaction context.
+     * Executes SELECT ... FOR UPDATE enforcing row-level Mutex Locking inside a
+     * transaction context.
      */
     public Product getProductForUpdate(String id) throws SQLException {
         String query = "SELECT id, name, type, price, stock, extra_attributes, image_path FROM Products WHERE id = ? FOR UPDATE";
@@ -89,20 +84,19 @@ public class ProductDAO {
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, p.getId());
             stmt.setString(2, p.getName());
-            
+
             String type = p.getClass().getSimpleName();
             stmt.setString(3, type);
             stmt.setDouble(4, p.getPrice());
             stmt.setInt(5, p.getStockQuantity());
-            
+
             String extra = "";
-            if (p instanceof PhysicalProduct) extra = ((PhysicalProduct)p).getDimensions();
-            else if (p instanceof DigitalProduct) extra = ((DigitalProduct)p).getDownloadLink();
-            else if (p instanceof PerishableProduct) extra = "Expires next week";
-            
+            if (p instanceof PhysicalProduct)
+                extra = ((PhysicalProduct) p).getDimensions();
+
             stmt.setString(6, extra);
             stmt.setString(7, p.getImagePath());
-            
+
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error adding product: " + e.getMessage());
@@ -130,9 +124,8 @@ public class ProductDAO {
             stmt.setString(4, p.getImagePath());
 
             String extra = "";
-            if (p instanceof PhysicalProduct) extra = ((PhysicalProduct)p).getDimensions();
-            else if (p instanceof DigitalProduct) extra = ((DigitalProduct)p).getDownloadLink();
-            else if (p instanceof PerishableProduct) extra = "Expires next week";
+            if (p instanceof PhysicalProduct)
+                extra = ((PhysicalProduct) p).getDimensions();
             stmt.setString(5, extra);
 
             stmt.setString(6, p.getId());
@@ -172,7 +165,7 @@ public class ProductDAO {
     }
 
     // ══════════════════════════════════════════════════════════════
-    //  DISCOUNT SETTINGS MANAGEMENT
+    // DISCOUNT SETTINGS MANAGEMENT
     // ══════════════════════════════════════════════════════════════
 
     /**
@@ -187,7 +180,7 @@ public class ProductDAO {
         public boolean enabled;
 
         public DiscountSetting(String id, String label, double discountPercent,
-                                double minOrderValue, int minItems, boolean enabled) {
+                double minOrderValue, int minItems, boolean enabled) {
             this.id = id;
             this.label = label;
             this.discountPercent = discountPercent;
@@ -203,9 +196,12 @@ public class ProductDAO {
     public void seedDefaultDiscounts() {
         String check = "SELECT COUNT(*) FROM Discount_Settings";
         try (PreparedStatement stmt = connection.prepareStatement(check);
-             ResultSet rs = stmt.executeQuery()) {
-            if (rs.next() && rs.getInt(1) > 0) return; // Already seeded
-        } catch (SQLException e) { return; }
+                ResultSet rs = stmt.executeQuery()) {
+            if (rs.next() && rs.getInt(1) > 0)
+                return; // Already seeded
+        } catch (SQLException e) {
+            return;
+        }
 
         String insert = "INSERT INTO Discount_Settings (id, label, discount_percent, min_order_value, min_items, enabled) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(insert)) {
@@ -267,16 +263,15 @@ public class ProductDAO {
         List<DiscountSetting> settings = new ArrayList<>();
         String query = "SELECT id, label, discount_percent, min_order_value, min_items, enabled FROM Discount_Settings ORDER BY id";
         try (PreparedStatement stmt = connection.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+                ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 settings.add(new DiscountSetting(
-                    rs.getString("id"),
-                    rs.getString("label"),
-                    rs.getDouble("discount_percent"),
-                    rs.getDouble("min_order_value"),
-                    rs.getInt("min_items"),
-                    rs.getBoolean("enabled")
-                ));
+                        rs.getString("id"),
+                        rs.getString("label"),
+                        rs.getDouble("discount_percent"),
+                        rs.getDouble("min_order_value"),
+                        rs.getInt("min_items"),
+                        rs.getBoolean("enabled")));
             }
         } catch (SQLException e) {
             System.err.println("Error fetching discount settings: " + e.getMessage());

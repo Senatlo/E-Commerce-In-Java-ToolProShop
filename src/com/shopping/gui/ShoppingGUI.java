@@ -60,7 +60,7 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
     private JPanel mainCardPanel;
     private CardLayout cardLayout;
 
-    private JPanel cartItemsPanel;   // replaces the old read-only cartTextArea
+    private JPanel cartItemsPanel; // replaces the old read-only cartTextArea
     private JLabel subtotalLabel;
     private JPanel customerCatalogPanel;
     private DefaultTableModel adminTableModel;
@@ -88,30 +88,31 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
     // Performance: Scaled Image Cache
     private final Map<String, ImageIcon> iconCache = new HashMap<>();
 
-    // ?????? Dark Theme Palette ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    private static final Color BG_DARKEST     = new Color(18, 18, 30);
-    private static final Color BG_DARK        = new Color(25, 25, 45);
-    private static final Color BG_CARD        = new Color(32, 33, 55);
-    private static final Color BG_CARD_HOVER  = new Color(42, 43, 70);
-    private static final Color BG_INPUT       = new Color(38, 39, 62);
-    private static final Color ACCENT_BLUE    = new Color(0, 150, 255);
-    private static final Color ACCENT_CYAN    = new Color(0, 210, 255);
-    private static final Color ACCENT_GREEN   = new Color(0, 230, 118);
-    private static final Color ACCENT_RED     = new Color(255, 69, 58);
-    private static final Color ACCENT_ORANGE  = new Color(255, 159, 10);
-    private static final Color ACCENT_PURPLE  = new Color(175, 82, 222);
-    private static final Color ACCENT_GOLD    = new Color(255, 214, 10);
-    private static final Color TEXT_PRIMARY    = new Color(235, 235, 245);
-    private static final Color TEXT_SECONDARY  = new Color(155, 155, 175);
-    private static final Color BORDER_SUBTLE  = new Color(58, 58, 80);
+    // ?????? Dark Theme Palette
+    // ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    private static final Color BG_DARKEST = new Color(18, 18, 30);
+    private static final Color BG_DARK = new Color(25, 25, 45);
+    private static final Color BG_CARD = new Color(32, 33, 55);
+    private static final Color BG_CARD_HOVER = new Color(42, 43, 70);
+    private static final Color BG_INPUT = new Color(38, 39, 62);
+    private static final Color ACCENT_BLUE = new Color(0, 150, 255);
+    private static final Color ACCENT_CYAN = new Color(0, 210, 255);
+    private static final Color ACCENT_GREEN = new Color(0, 230, 118);
+    private static final Color ACCENT_RED = new Color(255, 69, 58);
+    private static final Color ACCENT_ORANGE = new Color(255, 159, 10);
+    private static final Color ACCENT_PURPLE = new Color(175, 82, 222);
+    private static final Color ACCENT_GOLD = new Color(255, 214, 10);
+    private static final Color TEXT_PRIMARY = new Color(235, 235, 245);
+    private static final Color TEXT_SECONDARY = new Color(155, 155, 175);
+    private static final Color BORDER_SUBTLE = new Color(58, 58, 80);
 
-    private static final Font FONT_TITLE      = new Font("Segoe UI", Font.BOLD, 26);
-    private static final Font FONT_HEADING    = new Font("Segoe UI", Font.BOLD, 18);
-    private static final Font FONT_BODY       = new Font("Segoe UI", Font.PLAIN, 14);
-    private static final Font FONT_BODY_BOLD  = new Font("Segoe UI", Font.BOLD, 14);
-    private static final Font FONT_SMALL      = new Font("Segoe UI", Font.PLAIN, 12);
-    private static final Font FONT_MONO       = new Font("Consolas", Font.PLAIN, 13);
-    private static final Font FONT_RECEIPT    = new Font("Consolas", Font.PLAIN, 12);
+    private static final Font FONT_TITLE = new Font("Segoe UI", Font.BOLD, 26);
+    private static final Font FONT_HEADING = new Font("Segoe UI", Font.BOLD, 18);
+    private static final Font FONT_BODY = new Font("Segoe UI", Font.PLAIN, 14);
+    private static final Font FONT_BODY_BOLD = new Font("Segoe UI", Font.BOLD, 14);
+    private static final Font FONT_SMALL = new Font("Segoe UI", Font.PLAIN, 12);
+    private static final Font FONT_MONO = new Font("Consolas", Font.PLAIN, 13);
+    private static final Font FONT_RECEIPT = new Font("Consolas", Font.PLAIN, 12);
 
     // Image path mapping for all 30 tools
     private static final Map<String, String> TOOL_IMAGES = new HashMap<>();
@@ -161,7 +162,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
             if (logoFile.exists()) {
                 setIconImage(new ImageIcon(logoFile.getAbsolutePath()).getImage());
             }
-        } catch (Exception e) { /* fallback */ }
+        } catch (Exception e) {
+            /* fallback */ }
 
         // Core Initialize
         DatabaseConnection.getInstance().initializeDatabase();
@@ -198,46 +200,48 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
     }
 
     private void seedDefaultProducts() {
-        if (!productDAO.getAllProducts().isEmpty()) return;
+        if (!productDAO.getAllProducts().isEmpty())
+            return;
 
         String[][] tools = {
-            {"TOOL-001", "Power Drill 20V",           "89.99",  "15", "Cordless"},
-            {"TOOL-002", "Steel Claw Hammer",          "15.49",  "30", "16 oz"},
-            {"TOOL-003", "Adjustable Wrench 10in",     "12.99",  "45", "10-inch"},
-            {"TOOL-004", "Circular Saw 7.25in",        "129.99", "10", "Electric"},
-            {"TOOL-005", "Cordless Screwdriver Set",    "34.99",  "25", "32-piece"},
-            {"TOOL-006", "Digital Laser Level",         "59.99",  "18", "Self-leveling"},
-            {"TOOL-007", "Tape Measure 25ft",           "9.99",   "50", "Heavy duty"},
-            {"TOOL-008", "Socket Wrench Set",           "49.99",  "20", "72-piece"},
-            {"TOOL-009", "Electric Sander",             "45.99",  "12", "120 grit"},
-            {"TOOL-010", "Pipe Wrench 14in",            "22.99",  "28", "Cast iron"},
-            {"TOOL-011", "Needle Nose Pliers",          "8.49",   "40", "6-inch"},
-            {"TOOL-012", "Utility Knife Set",           "14.99",  "35", "Retractable"},
-            {"TOOL-013", "Angle Grinder 4.5in",         "39.99",  "15", "850W"},
-            {"TOOL-014", "LED Work Light",              "27.99",  "22", "Rechargeable"},
-            {"TOOL-015", "Hex Key Allen Set",           "11.99",  "38", "30-piece"},
-            {"TOOL-016", "Jigsaw Electric",             "64.99",  "14", "Variable speed"},
-            {"TOOL-017", "Safety Goggle Pro",            "6.99",   "60", "Anti-fog"},
-            {"TOOL-018", "Work Gloves Heavy Duty",      "12.49",  "55", "Leather"},
-            {"TOOL-019", "Drill Bit Set HSS",           "24.99",  "30", "29-piece"},
-            {"TOOL-020", "Voltage Tester Digital",      "19.99",  "25", "Non-contact"},
-            {"TOOL-021", "Ratchet Set Metric",          "54.99",  "16", "40-piece"},
-            {"TOOL-022", "Wood Chisel Set",             "29.99",  "20", "6-piece"},
-            {"TOOL-023", "Heat Gun 1500W",              "32.99",  "18", "Adjustable"},
-            {"TOOL-024", "Stud Finder Digital",         "21.99",  "22", "Deep scan"},
-            {"TOOL-025", "Magnetic Bit Holder",          "7.99",   "45", "Universal"},
-            {"TOOL-026", "Wire Stripper Tool",          "13.99",  "35", "Auto-adjust"},
-            {"TOOL-027", "Clamp Set 6-Pack",            "18.99",  "28", "Spring clamps"},
-            {"TOOL-028", "Caulking Gun Pro",            "11.49",  "30", "Drip-free"},
-            {"TOOL-029", "Spirit Level 24in",           "16.99",  "25", "Aluminum"},
-            {"TOOL-030", "Impact Driver 18V",           "99.99",  "12", "Brushless"},
+                { "TOOL-001", "Power Drill 20V", "89.99", "15", "Cordless" },
+                { "TOOL-002", "Steel Claw Hammer", "15.49", "30", "16 oz" },
+                { "TOOL-003", "Adjustable Wrench 10in", "12.99", "45", "10-inch" },
+                { "TOOL-004", "Circular Saw 7.25in", "129.99", "10", "Electric" },
+                { "TOOL-005", "Cordless Screwdriver Set", "34.99", "25", "32-piece" },
+                { "TOOL-006", "Digital Laser Level", "59.99", "18", "Self-leveling" },
+                { "TOOL-007", "Tape Measure 25ft", "9.99", "50", "Heavy duty" },
+                { "TOOL-008", "Socket Wrench Set", "49.99", "20", "72-piece" },
+                { "TOOL-009", "Electric Sander", "45.99", "12", "120 grit" },
+                { "TOOL-010", "Pipe Wrench 14in", "22.99", "28", "Cast iron" },
+                { "TOOL-011", "Needle Nose Pliers", "8.49", "40", "6-inch" },
+                { "TOOL-012", "Utility Knife Set", "14.99", "35", "Retractable" },
+                { "TOOL-013", "Angle Grinder 4.5in", "39.99", "15", "850W" },
+                { "TOOL-014", "LED Work Light", "27.99", "22", "Rechargeable" },
+                { "TOOL-015", "Hex Key Allen Set", "11.99", "38", "30-piece" },
+                { "TOOL-016", "Jigsaw Electric", "64.99", "14", "Variable speed" },
+                { "TOOL-017", "Safety Goggle Pro", "6.99", "60", "Anti-fog" },
+                { "TOOL-018", "Work Gloves Heavy Duty", "12.49", "55", "Leather" },
+                { "TOOL-019", "Drill Bit Set HSS", "24.99", "30", "29-piece" },
+                { "TOOL-020", "Voltage Tester Digital", "19.99", "25", "Non-contact" },
+                { "TOOL-021", "Ratchet Set Metric", "54.99", "16", "40-piece" },
+                { "TOOL-022", "Wood Chisel Set", "29.99", "20", "6-piece" },
+                { "TOOL-023", "Heat Gun 1500W", "32.99", "18", "Adjustable" },
+                { "TOOL-024", "Stud Finder Digital", "21.99", "22", "Deep scan" },
+                { "TOOL-025", "Magnetic Bit Holder", "7.99", "45", "Universal" },
+                { "TOOL-026", "Wire Stripper Tool", "13.99", "35", "Auto-adjust" },
+                { "TOOL-027", "Clamp Set 6-Pack", "18.99", "28", "Spring clamps" },
+                { "TOOL-028", "Caulking Gun Pro", "11.49", "30", "Drip-free" },
+                { "TOOL-029", "Spirit Level 24in", "16.99", "25", "Aluminum" },
+                { "TOOL-030", "Impact Driver 18V", "99.99", "12", "Brushless" },
         };
 
         for (String[] t : tools) {
             Product p = new PhysicalProduct(t[0], t[1], Double.parseDouble(t[2]),
-                Integer.parseInt(t[3]), 1.0, t[4]);
+                    Integer.parseInt(t[3]), 1.0, t[4]);
             String imgPath = TOOL_IMAGES.get(t[0]);
-            if (imgPath != null) p.setImagePath(imgPath);
+            if (imgPath != null)
+                p.setImagePath(imgPath);
             productDAO.addProduct(p);
         }
         System.out.println("Seeded 30 default tool products.");
@@ -249,14 +253,14 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
             for (CartItem item : event.getOrder().getCart().getItems()) {
                 if (item.getProduct().getStockQuantity() <= 5) {
                     System.out.println("ALERT: Low stock for " + item.getProduct().getName()
-                        + " (" + item.getProduct().getStockQuantity() + " remaining)");
+                            + " (" + item.getProduct().getStockQuantity() + " remaining)");
                 }
             }
         });
     }
 
     // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    //  LOGIN PANEL
+    // LOGIN PANEL
     // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
     private JPanel buildLoginPanel() {
@@ -298,8 +302,11 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
                 Image scaled = rawIcon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
                 logoLabel.setIcon(new ImageIcon(scaled));
             }
-        } catch (Exception e) { /* ignore */ }
-        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2;
+        } catch (Exception e) {
+            /* ignore */ }
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
         card.add(logoLabel, gbc);
 
         JLabel titleLabel = new JLabel("ToolShop Pro", SwingConstants.CENTER);
@@ -360,8 +367,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
                 passField.setText("");
             } else {
                 JOptionPane.showMessageDialog(this,
-                    "Invalid username or password.", "Authentication Failed",
-                    JOptionPane.ERROR_MESSAGE);
+                        "Invalid username or password.", "Authentication Failed",
+                        JOptionPane.ERROR_MESSAGE);
             }
         });
         card.add(loginButton, gbc);
@@ -378,7 +385,7 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
     }
 
     // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    //  CUSTOMER VIEW
+    // CUSTOMER VIEW
     // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
     private JPanel buildCustomerView() {
@@ -397,9 +404,11 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
             File logoFile = new File("assets/logo.png");
             if (logoFile.exists()) {
                 miniLogo.setIcon(new ImageIcon(
-                    new ImageIcon(logoFile.getAbsolutePath()).getImage().getScaledInstance(36, 36, Image.SCALE_SMOOTH)));
+                        new ImageIcon(logoFile.getAbsolutePath()).getImage().getScaledInstance(36, 36,
+                                Image.SCALE_SMOOTH)));
             }
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
         titlePanel.add(miniLogo);
         JLabel shopTitle = new JLabel("ToolShop Pro - Product Catalog");
         shopTitle.setFont(FONT_HEADING);
@@ -414,7 +423,10 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         welcomeLabel.setForeground(TEXT_SECONDARY);
         topRight.add(welcomeLabel);
         JButton logoutBtn = createAccentButton("Logout", new Color(80, 80, 100));
-        logoutBtn.addActionListener(e -> { loggedInUser = null; cardLayout.show(mainCardPanel, "LOGIN"); });
+        logoutBtn.addActionListener(e -> {
+            loggedInUser = null;
+            cardLayout.show(mainCardPanel, "LOGIN");
+        });
         topRight.add(logoutBtn);
         topBar.add(topRight, BorderLayout.EAST);
         view.add(topBar, BorderLayout.NORTH);
@@ -448,13 +460,12 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         cartItemsPanel.setBackground(BG_CARD);
         cartItemsPanel.setBorder(new EmptyBorder(4, 4, 4, 4));
         JScrollPane cartScroll = new JScrollPane(cartItemsPanel,
-            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);   // ??? forces content to fit width
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER); // ??? forces content to fit width
         cartScroll.setBorder(new LineBorder(BORDER_SUBTLE));
         cartScroll.getViewport().setBackground(BG_CARD);
         cartScroll.getVerticalScrollBar().setUnitIncrement(10);
         cartPanel.add(cartScroll, BorderLayout.CENTER);
-
 
         JPanel cartBottom = new JPanel();
         cartBottom.setLayout(new BoxLayout(cartBottom, BoxLayout.Y_AXIS));
@@ -504,9 +515,9 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         }
 
         if (bestDiscount != null) {
-            shoppingCart.setDiscountStrategy(new com.shopping.discount.PercentageDiscount(bestDiscount.discountPercent));
+            shoppingCart.setDiscountPercent(bestDiscount.discountPercent);
         } else {
-            shoppingCart.setDiscountStrategy(null);
+            shoppingCart.setDiscountPercent(0.0);
         }
 
         OrderProcessor processor = new OrderProcessor(productDAO);
@@ -559,7 +570,9 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
         JButton printBtn = createAccentButton("Print", ACCENT_BLUE);
         printBtn.addActionListener(e -> {
-            try { receiptArea.print(); } catch (Exception ex) {
+            try {
+                receiptArea.print();
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(receiptDialog, "Printing failed: " + ex.getMessage());
             }
         });
@@ -576,7 +589,7 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
     private String buildReceiptText(Order order, double subtotal, DiscountSetting discount, double savings) {
         StringBuilder r = new StringBuilder();
-        String line =  "--------------------------------------------";
+        String line = "--------------------------------------------";
         String dline = "============================================";
 
         r.append("\n");
@@ -600,10 +613,11 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
         for (CartItem item : order.getCart().getItems()) {
             String itemName = item.getProduct().getName();
-            if (itemName.length() > 24) itemName = itemName.substring(0, 22) + "..";
+            if (itemName.length() > 24)
+                itemName = itemName.substring(0, 22) + "..";
             double amount = item.getProduct().getPrice() * item.getQuantity();
             r.append(String.format(Locale.US, " %-24s %4d %10s\n",
-                itemName, item.getQuantity(), String.format(Locale.US, "$%.2f", amount)));
+                    itemName, item.getQuantity(), String.format(Locale.US, "$%.2f", amount)));
             if (item.getQuantity() > 1) {
                 r.append(String.format(Locale.US, "   @ $%.2f each\n", item.getProduct().getPrice()));
             }
@@ -614,12 +628,13 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
         if (discount != null && savings > 0) {
             r.append(String.format(Locale.US, " %-30s %10s\n",
-                discount.label + " (" + (int)discount.discountPercent + "%):",
-                "-$" + String.format(Locale.US, "%.2f", savings)));
+                    discount.label + " (" + (int) discount.discountPercent + "%):",
+                    "-$" + String.format(Locale.US, "%.2f", savings)));
         }
 
         r.append(" ").append(line).append("\n");
-        r.append(String.format(Locale.US, " %-30s %10s\n", "TOTAL:", String.format(Locale.US, "$%.2f", order.getFinalTotal())));
+        r.append(String.format(Locale.US, " %-30s %10s\n", "TOTAL:",
+                String.format(Locale.US, "$%.2f", order.getFinalTotal())));
         r.append(" ").append(dline).append("\n\n");
 
         r.append("      Payment: Approved\n");
@@ -644,7 +659,10 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         // Render the text area to a buffered image
         int w = receiptArea.getWidth();
         int h = receiptArea.getHeight();
-        if (w <= 0 || h <= 0) { w = 400; h = 600; }
+        if (w <= 0 || h <= 0) {
+            w = 400;
+            h = 600;
+        }
 
         BufferedImage image = new BufferedImage(w + 40, h + 40, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = image.createGraphics();
@@ -658,7 +676,7 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         // File chooser
         JFileChooser chooser = new JFileChooser();
         chooser.setSelectedFile(new File("receipt_" +
-            LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".png"));
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".png"));
         chooser.setFileFilter(new FileNameExtensionFilter("PNG Image", "png"));
 
         if (chooser.showSaveDialog(parent) == JFileChooser.APPROVE_OPTION) {
@@ -669,12 +687,12 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
                 }
                 ImageIO.write(image, "png", file);
                 JOptionPane.showMessageDialog(parent,
-                    "Receipt saved as: " + file.getAbsolutePath(),
-                    "Saved", JOptionPane.INFORMATION_MESSAGE);
+                        "Receipt saved as: " + file.getAbsolutePath(),
+                        "Saved", JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(parent,
-                    "Failed to save image: " + ex.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE);
+                        "Failed to save image: " + ex.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -692,9 +710,13 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         SwingWorker<List<Product>, Void> worker = new SwingWorker<>() {
             @Override
             protected List<Product> doInBackground() {
-                try { Thread.sleep(150); } catch (Exception e) {}
+                try {
+                    Thread.sleep(150);
+                } catch (Exception e) {
+                }
                 return new ArrayList<>(productDAO.getAllProducts().values());
             }
+
             @Override
             protected void done() {
                 try {
@@ -719,7 +741,9 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
                     }
                     customerCatalogPanel.revalidate();
                     customerCatalogPanel.repaint();
-                } catch (Exception e) { e.printStackTrace(); }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         };
         worker.execute();
@@ -731,7 +755,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g;
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                GradientPaint gp = new GradientPaint(0, 0, new Color(100, 50, 0), getWidth(), 0, new Color(180, 100, 0));
+                GradientPaint gp = new GradientPaint(0, 0, new Color(100, 50, 0), getWidth(), 0,
+                        new Color(180, 100, 0));
                 g2.setPaint(gp);
                 g2.fill(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 12, 12));
             }
@@ -742,9 +767,10 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
         StringBuilder text = new StringBuilder("Active Deals: ");
         for (int i = 0; i < discounts.size(); i++) {
-            if (i > 0) text.append(" | ");
+            if (i > 0)
+                text.append(" | ");
             DiscountSetting ds = discounts.get(i);
-            text.append(ds.label).append(" ").append((int)ds.discountPercent).append("% OFF");
+            text.append(ds.label).append(" ").append((int) ds.discountPercent).append("% OFF");
         }
 
         JLabel bannerLabel = new JLabel(text.toString());
@@ -759,10 +785,18 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
             private boolean hovered = false;
             {
                 addMouseListener(new MouseAdapter() {
-                    public void mouseEntered(MouseEvent e) { hovered = true; repaint(); }
-                    public void mouseExited(MouseEvent e) { hovered = false; repaint(); }
+                    public void mouseEntered(MouseEvent e) {
+                        hovered = true;
+                        repaint();
+                    }
+
+                    public void mouseExited(MouseEvent e) {
+                        hovered = false;
+                        repaint();
+                    }
                 });
             }
+
             @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g;
@@ -786,7 +820,7 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
                 imageLabel.setIcon(iconCache.get(path));
             } else if (new File(path).exists()) {
                 ImageIcon icon = new ImageIcon(
-                    new ImageIcon(path).getImage().getScaledInstance(56, 56, Image.SCALE_SMOOTH));
+                        new ImageIcon(path).getImage().getScaledInstance(56, 56, Image.SCALE_SMOOTH));
                 iconCache.put(path, icon);
                 imageLabel.setIcon(icon);
             } else {
@@ -802,26 +836,29 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         details.setOpaque(false);
         details.setBorder(new EmptyBorder(3, 0, 3, 0));
 
-        JLabel nameLabel = new JLabel(product.getName());
+        JLabel nameLabel = new JLabel(product.getName(), SwingConstants.CENTER);
         nameLabel.setFont(FONT_BODY_BOLD);
         nameLabel.setForeground(TEXT_PRIMARY);
+        nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         details.add(nameLabel);
 
-        JLabel codeLabel = new JLabel("Code: " + product.getId());
+        JLabel codeLabel = new JLabel("Code: " + product.getId(), SwingConstants.CENTER);
         codeLabel.setFont(FONT_SMALL);
         codeLabel.setForeground(TEXT_SECONDARY);
+        codeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         details.add(codeLabel);
 
-        JPanel priceStockRow = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        JPanel priceStockRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         priceStockRow.setOpaque(false);
+        priceStockRow.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel priceLabel = new JLabel(String.format(Locale.US, "$%.2f", product.getPrice()));
         priceLabel.setFont(FONT_BODY_BOLD);
         priceLabel.setForeground(ACCENT_CYAN);
         priceStockRow.add(priceLabel);
 
         String stockText = product.getStockQuantity() <= 5
-            ? "   Low Stock: " + product.getStockQuantity()
-            : "   In Stock: " + product.getStockQuantity();
+                ? "   Low Stock: " + product.getStockQuantity()
+                : "   In Stock: " + product.getStockQuantity();
         JLabel stockLabel = new JLabel(stockText);
         stockLabel.setFont(FONT_SMALL);
         stockLabel.setForeground(product.getStockQuantity() <= 5 ? ACCENT_RED : TEXT_SECONDARY);
@@ -861,7 +898,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
      * Each row has: product name+price | ??? qty + | line total | Remove button.
      */
     private void updateCartDisplay() {
-        if (cartItemsPanel == null) return;
+        if (cartItemsPanel == null)
+            return;
         cartItemsPanel.removeAll();
 
         int totalItems = 0;
@@ -888,7 +926,7 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         }
 
         subtotalLabel.setText(String.format(Locale.US,
-            "Subtotal (%d items): $%.2f", totalItems, shoppingCart.calculateSubtotal()));
+                "Subtotal (%d items): $%.2f", totalItems, shoppingCart.calculateSubtotal()));
         cartItemsPanel.revalidate();
         cartItemsPanel.repaint();
     }
@@ -897,9 +935,9 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
      * Builds one interactive cart row.
      * Three-line stacked layout ??? always fits any width:
      *
-     *   [ Product Name                    $lineTotal ]
-     *   [ @ $unit each                               ]
-     *   [ [  -  ]  [ qty ]  [  +  ]       [ Remove ] ]
+     * [ Product Name $lineTotal ]
+     * [ @ $unit each ]
+     * [ [ - ] [ qty ] [ + ] [ Remove ] ]
      */
     private JPanel buildCartItemRow(CartItem item) {
         String productId = item.getProduct().getId();
@@ -913,7 +951,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         row.setMaximumSize(new Dimension(Integer.MAX_VALUE, 82));
         row.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        // ?????? Line 1: name (left)  +  line total (right) ???????????????????????????????????????
+        // ?????? Line 1: name (left) + line total (right)
+        // ???????????????????????????????????????
         JPanel line1 = new JPanel(new BorderLayout());
         line1.setOpaque(false);
         line1.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -932,9 +971,10 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
         row.add(Box.createVerticalStrut(2));
 
-        // ?????? Line 2: unit price ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+        // ?????? Line 2: unit price
+        // ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????
         JLabel unitLabel = new JLabel(
-            String.format(Locale.US, "$%.2f / unit", item.getProduct().getPrice()));
+                String.format(Locale.US, "$%.2f / unit", item.getProduct().getPrice()));
         unitLabel.setFont(FONT_SMALL);
         unitLabel.setForeground(TEXT_SECONDARY);
         unitLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -942,7 +982,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
         row.add(Box.createVerticalStrut(5));
 
-        // ?????? Line 3: qty controls (left) + Remove (right) ?????????????????????????????????
+        // ?????? Line 3: qty controls (left) + Remove (right)
+        // ?????????????????????????????????
         JPanel line3 = new JPanel(new BorderLayout());
         line3.setOpaque(false);
         line3.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -987,19 +1028,18 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
     /** Creates a small square qty button (??? or +) with custom paint. */
     private JButton makeQtyButton(String label, Color bg,
-                                   java.awt.event.ActionListener action) {
+            java.awt.event.ActionListener action) {
         JButton btn = new JButton(label) {
             @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g;
                 g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                g2.setColor(getModel().isPressed() ? bg.brighter() :
-                            getModel().isRollover() ? bg.brighter() : bg);
+                g2.setColor(getModel().isPressed() ? bg.brighter() : getModel().isRollover() ? bg.brighter() : bg);
                 g2.fillRoundRect(0, 0, getWidth(), getHeight(), 8, 8);
                 g2.setColor(Color.WHITE);
                 g2.setFont(new Font("Segoe UI", Font.BOLD, 16));
                 FontMetrics fm = g2.getFontMetrics();
-                int tx = (getWidth()  - fm.stringWidth(label)) / 2;
+                int tx = (getWidth() - fm.stringWidth(label)) / 2;
                 int ty = (getHeight() + fm.getAscent() - fm.getDescent()) / 2;
                 g2.drawString(label, tx, ty);
             }
@@ -1015,7 +1055,7 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
     /** Creates the Remove button with a custom red rounded style. */
     private JButton makeRemoveButton(String label,
-                                      java.awt.event.ActionListener action) {
+            java.awt.event.ActionListener action) {
         Color bg = ACCENT_RED;
         JButton btn = new JButton(label) {
             @Override
@@ -1027,7 +1067,7 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
                 g2.setColor(Color.WHITE);
                 g2.setFont(new Font("Segoe UI", Font.BOLD, 11));
                 FontMetrics fm = g2.getFontMetrics();
-                int tx = (getWidth()  - fm.stringWidth(label)) / 2;
+                int tx = (getWidth() - fm.stringWidth(label)) / 2;
                 int ty = (getHeight() + fm.getAscent() - fm.getDescent()) / 2;
                 g2.drawString(label, tx, ty);
             }
@@ -1042,7 +1082,7 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
     }
 
     // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    //  ADMIN DASHBOARD
+    // ADMIN DASHBOARD
     // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
     private JPanel buildAdminDashboard() {
@@ -1061,9 +1101,11 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
             File logoFile = new File("assets/logo.png");
             if (logoFile.exists()) {
                 miniLogo.setIcon(new ImageIcon(
-                    new ImageIcon(logoFile.getAbsolutePath()).getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH)));
+                        new ImageIcon(logoFile.getAbsolutePath()).getImage().getScaledInstance(32, 32,
+                                Image.SCALE_SMOOTH)));
             }
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
         titlePanel.add(miniLogo);
         JLabel title = new JLabel("Admin Dashboard");
         title.setFont(FONT_TITLE);
@@ -1074,15 +1116,21 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         JPanel topRight = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         topRight.setBackground(BG_DARK);
         JButton logoutBtn = createAccentButton("Logout", new Color(80, 80, 100));
-        logoutBtn.addActionListener(e -> { loggedInUser = null; cardLayout.show(mainCardPanel, "LOGIN"); });
+        logoutBtn.addActionListener(e -> {
+            loggedInUser = null;
+            cardLayout.show(mainCardPanel, "LOGIN");
+        });
         topRight.add(logoutBtn);
         topBar.add(topRight, BorderLayout.EAST);
         panel.add(topBar, BorderLayout.NORTH);
 
         // Product table
         adminTableModel = new DefaultTableModel(
-            new String[]{"Code", "Name", "Price", "Stock", "Sold"}, 0) {
-            @Override public boolean isCellEditable(int r, int c) { return false; }
+                new String[] { "Code", "Name", "Price", "Stock", "Sold" }, 0) {
+            @Override
+            public boolean isCellEditable(int r, int c) {
+                return false;
+            }
         };
         JTable table = new JTable(adminTableModel);
         table.setRowHeight(30);
@@ -1119,13 +1167,17 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         JButton addItemBtn = createAccentButton("+ Add New Item", ACCENT_GREEN);
         addItemBtn.addActionListener(e -> {
             clearAdminForm();
-            if (adminRightTabs != null) adminRightTabs.setSelectedIndex(0);
+            if (adminRightTabs != null)
+                adminRightTabs.setSelectedIndex(0);
         });
 
         JButton editBtn = createAccentButton("Edit Selected", ACCENT_ORANGE);
         editBtn.addActionListener(e -> {
             int row = table.getSelectedRow();
-            if (row == -1) { JOptionPane.showMessageDialog(this, "Select a product to edit."); return; }
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Select a product to edit.");
+                return;
+            }
             String id = (String) adminTableModel.getValueAt(row, 0);
             Product p = productDAO.getAllProducts().get(id);
             if (p != null) {
@@ -1137,25 +1189,30 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
                 adminSelectedImagePath = p.getImagePath();
                 adminEditMode = true;
                 loadImagePreview(adminSelectedImagePath);
-                if (adminRightTabs != null) adminRightTabs.setSelectedIndex(0);
+                if (adminRightTabs != null)
+                    adminRightTabs.setSelectedIndex(0);
             }
         });
 
         JButton deleteBtn = createAccentButton("Delete Selected", ACCENT_RED);
         deleteBtn.addActionListener(e -> {
             int row = table.getSelectedRow();
-            if (row == -1) { JOptionPane.showMessageDialog(this, "Select a product to delete."); return; }
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "Select a product to delete.");
+                return;
+            }
             String id = (String) adminTableModel.getValueAt(row, 0);
             String name = (String) adminTableModel.getValueAt(row, 1);
             int confirm = JOptionPane.showConfirmDialog(this,
-                "Delete product \"" + name + "\" (" + id + ")?",
-                "Confirm Deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    "Delete product \"" + name + "\" (" + id + ")?",
+                    "Confirm Deletion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
             if (confirm == JOptionPane.YES_OPTION) {
                 if (productDAO.deleteProduct(id)) {
                     refreshAdminDashboardAsync();
                     JOptionPane.showMessageDialog(this, "Product deleted.");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Cannot delete - referenced by orders.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Cannot delete - referenced by orders.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -1217,7 +1274,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         GridBagConstraints fc = new GridBagConstraints();
         fc.insets = new Insets(5, 5, 5, 5);
         fc.fill = GridBagConstraints.HORIZONTAL;
-        fc.gridwidth = 2; fc.gridx = 0;
+        fc.gridwidth = 2;
+        fc.gridx = 0;
 
         JLabel formTitle = new JLabel("Product Details");
         formTitle.setFont(FONT_HEADING);
@@ -1227,25 +1285,29 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
         fc.gridwidth = 1;
 
-        fc.gridy = 1; fc.gridx = 0;
+        fc.gridy = 1;
+        fc.gridx = 0;
         formCard.add(createFormLabel("Product Code"), fc);
         adminIdField = createDarkTextField(12);
         fc.gridx = 1;
         formCard.add(adminIdField, fc);
 
-        fc.gridy = 2; fc.gridx = 0;
+        fc.gridy = 2;
+        fc.gridx = 0;
         formCard.add(createFormLabel("Name"), fc);
         adminNameField = createDarkTextField(12);
         fc.gridx = 1;
         formCard.add(adminNameField, fc);
 
-        fc.gridy = 3; fc.gridx = 0;
+        fc.gridy = 3;
+        fc.gridx = 0;
         formCard.add(createFormLabel("Price ($)"), fc);
         adminPriceField = createDarkTextField(12);
         fc.gridx = 1;
         formCard.add(adminPriceField, fc);
 
-        fc.gridy = 4; fc.gridx = 0;
+        fc.gridy = 4;
+        fc.gridx = 0;
         formCard.add(createFormLabel("Stock"), fc);
         adminStockSpinner = new JSpinner(new SpinnerNumberModel(1, 0, 99999, 1));
         adminStockSpinner.setFont(FONT_BODY);
@@ -1254,7 +1316,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         fc.gridx = 1;
         formCard.add(adminStockSpinner, fc);
 
-        fc.gridy = 5; fc.gridx = 0;
+        fc.gridy = 5;
+        fc.gridx = 0;
         formCard.add(createFormLabel("Photo"), fc);
         JButton chooseImgBtn = createAccentButton("Browse...", ACCENT_PURPLE);
         chooseImgBtn.addActionListener(e -> {
@@ -1264,7 +1327,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
                 File selectedFile = chooser.getSelectedFile();
                 try {
                     Path assetsDir = Paths.get("assets");
-                    if (!Files.exists(assetsDir)) Files.createDirectories(assetsDir);
+                    if (!Files.exists(assetsDir))
+                        Files.createDirectories(assetsDir);
                     Path dest = assetsDir.resolve(selectedFile.getName());
                     Files.copy(selectedFile.toPath(), dest, StandardCopyOption.REPLACE_EXISTING);
                     adminSelectedImagePath = "assets/" + selectedFile.getName();
@@ -1282,7 +1346,9 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         adminImagePreview.setForeground(TEXT_SECONDARY);
         adminImagePreview.setPreferredSize(new Dimension(80, 80));
         adminImagePreview.setBorder(BorderFactory.createDashedBorder(BORDER_SUBTLE, 2, 4, 3, true));
-        fc.gridy = 6; fc.gridx = 0; fc.gridwidth = 2;
+        fc.gridy = 6;
+        fc.gridx = 0;
+        fc.gridwidth = 2;
         formCard.add(adminImagePreview, fc);
 
         JPanel formButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
@@ -1294,7 +1360,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         clearBtn.addActionListener(e -> clearAdminForm());
         formButtons.add(clearBtn);
 
-        fc.gridy = 7; fc.gridwidth = 2;
+        fc.gridy = 7;
+        fc.gridwidth = 2;
         fc.insets = new Insets(15, 5, 5, 5);
         formCard.add(formButtons, fc);
 
@@ -1302,7 +1369,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         return wrapper;
     }
 
-    // ?????? DISCOUNT SETTINGS PANEL (FIXED LAYOUT) ??????????????????????????????????????????????????????????????????
+    // ?????? DISCOUNT SETTINGS PANEL (FIXED LAYOUT)
+    // ??????????????????????????????????????????????????????????????????
 
     private JPanel buildDiscountSettingsPanel() {
         JPanel wrapper = new JPanel(new BorderLayout());
@@ -1337,7 +1405,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
     }
 
     private void refreshDiscountSettingsUI() {
-        if (discountSettingsPanel == null) return;
+        if (discountSettingsPanel == null)
+            return;
         discountSettingsPanel.removeAll();
 
         List<DiscountSetting> settings = productDAO.getAllDiscountSettings();
@@ -1372,13 +1441,17 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         gc.weightx = 1.0;
 
         // Row 0: Title + Toggle
-        gc.gridx = 0; gc.gridy = 0; gc.gridwidth = 1; gc.weightx = 0.6;
+        gc.gridx = 0;
+        gc.gridy = 0;
+        gc.gridwidth = 1;
+        gc.weightx = 0.6;
         JLabel nameLabel = new JLabel(ds.label);
         nameLabel.setFont(FONT_BODY_BOLD);
         nameLabel.setForeground(ds.enabled ? ACCENT_GREEN : TEXT_SECONDARY);
         card.add(nameLabel, gc);
 
-        gc.gridx = 1; gc.weightx = 0.4;
+        gc.gridx = 1;
+        gc.weightx = 0.4;
         JCheckBox enableToggle = new JCheckBox("Enabled", ds.enabled);
         enableToggle.setFont(FONT_SMALL);
         enableToggle.setForeground(ds.enabled ? ACCENT_GREEN : TEXT_SECONDARY);
@@ -1386,7 +1459,9 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         card.add(enableToggle, gc);
 
         // Row 1: Percent
-        gc.gridx = 0; gc.gridy = 1; gc.weightx = 0.5;
+        gc.gridx = 0;
+        gc.gridy = 1;
+        gc.weightx = 0.5;
         JLabel pctLabel = createFormLabel("Discount %");
         pctLabel.setFont(FONT_SMALL);
         card.add(pctLabel, gc);
@@ -1397,7 +1472,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         card.add(percentField, gc);
 
         // Row 2: Min order
-        gc.gridx = 0; gc.gridy = 2;
+        gc.gridx = 0;
+        gc.gridy = 2;
         JLabel moLabel = createFormLabel("Min Order ($)");
         moLabel.setFont(FONT_SMALL);
         card.add(moLabel, gc);
@@ -1408,7 +1484,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         card.add(minOrderField, gc);
 
         // Row 3: Min items
-        gc.gridx = 0; gc.gridy = 3;
+        gc.gridx = 0;
+        gc.gridy = 3;
         JLabel miLabel = createFormLabel("Min Items");
         miLabel.setFont(FONT_SMALL);
         card.add(miLabel, gc);
@@ -1419,7 +1496,9 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         card.add(minItemsField, gc);
 
         // Row 4: Save button - FULL WIDTH
-        gc.gridx = 0; gc.gridy = 4; gc.gridwidth = 2;
+        gc.gridx = 0;
+        gc.gridy = 4;
+        gc.gridwidth = 2;
         gc.insets = new Insets(8, 4, 4, 4);
         gc.fill = GridBagConstraints.HORIZONTAL;
         JButton saveBtn = createAccentButton("Save", ACCENT_BLUE);
@@ -1435,7 +1514,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
                     return;
                 }
                 productDAO.updateDiscountSetting(ds);
-                JOptionPane.showMessageDialog(this, "\"" + ds.label + "\" updated!", "Saved", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "\"" + ds.label + "\" updated!", "Saved",
+                        JOptionPane.INFORMATION_MESSAGE);
                 refreshDiscountSettingsUI();
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Enter valid numbers.", "Error", JOptionPane.WARNING_MESSAGE);
@@ -1446,7 +1526,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         return card;
     }
 
-    // ?????? USERS MANAGEMENT PANEL ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    // ?????? USERS MANAGEMENT PANEL
+    // ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
     private JPanel buildUsersPanel() {
         JPanel wrapper = new JPanel(new BorderLayout());
@@ -1461,8 +1542,11 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         headerPanel.add(headerLabel, BorderLayout.WEST);
         wrapper.add(headerPanel, BorderLayout.NORTH);
 
-        usersTableModel = new DefaultTableModel(new String[]{"ID", "Username", "Role"}, 0) {
-            @Override public boolean isCellEditable(int r, int c) { return false; }
+        usersTableModel = new DefaultTableModel(new String[] { "ID", "Username", "Role" }, 0) {
+            @Override
+            public boolean isCellEditable(int r, int c) {
+                return false;
+            }
         };
         JTable usersTable = new JTable(usersTableModel);
         usersTable.setRowHeight(30);
@@ -1509,15 +1593,17 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
     }
 
     private void refreshUsersTable() {
-        if (usersTableModel == null) return;
+        if (usersTableModel == null)
+            return;
         usersTableModel.setRowCount(0);
         List<User> users = userDAO.getAllUsers();
         for (User u : users) {
-            usersTableModel.addRow(new Object[]{u.getId(), u.getUsername(), u.getRole().name()});
+            usersTableModel.addRow(new Object[] { u.getId(), u.getUsername(), u.getRole().name() });
         }
     }
 
-    // ?????? ORDERS HISTORY PANEL ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    // ?????? ORDERS HISTORY PANEL
+    // ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
     private JPanel buildOrdersPanel() {
         JPanel wrapper = new JPanel(new BorderLayout());
@@ -1538,8 +1624,11 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
         // Column 4 ("_fullId") is HIDDEN ??? stores the real UUID for detail lookup
         ordersTableModel = new DefaultTableModel(
-            new String[]{"Order ID", "Customer", "Total", "Date", "_fullId"}, 0) {
-            @Override public boolean isCellEditable(int r, int c) { return false; }
+                new String[] { "Order ID", "Customer", "Total", "Date", "_fullId" }, 0) {
+            @Override
+            public boolean isCellEditable(int r, int c) {
+                return false;
+            }
         };
         JTable ordersTable = new JTable(ordersTableModel);
         ordersTable.setRowHeight(28);
@@ -1577,11 +1666,11 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
                 if (e.getClickCount() == 2) {
                     int row = ordersTable.getSelectedRow();
                     if (row >= 0) {
-                        String fullId  = (String) ordersTableModel.getValueAt(row, 4);
+                        String fullId = (String) ordersTableModel.getValueAt(row, 4);
                         String display = (String) ordersTableModel.getValueAt(row, 0);
                         String customer = (String) ordersTableModel.getValueAt(row, 1);
-                        String total   = (String) ordersTableModel.getValueAt(row, 2);
-                        String date    = (String) ordersTableModel.getValueAt(row, 3);
+                        String total = (String) ordersTableModel.getValueAt(row, 2);
+                        String date = (String) ordersTableModel.getValueAt(row, 3);
                         showOrderDetailDialog(fullId, display, customer, total, date);
                     }
                 }
@@ -1605,7 +1694,7 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
     /** Shows a styled dialog listing every item in the given order. */
     private void showOrderDetailDialog(String fullOrderId, String displayId,
-                                       String customer, String total, String date) {
+            String customer, String total, String date) {
         JDialog dlg = new JDialog(this, "Order Details ??? " + displayId, true);
         dlg.setMinimumSize(new Dimension(580, 420));
         dlg.getContentPane().setBackground(BG_DARKEST);
@@ -1619,10 +1708,10 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         hdr.setBackground(BG_CARD);
         hdr.setBorder(new EmptyBorder(10, 14, 10, 14));
         JLabel[] hdrLabels = {
-            new JLabel("Customer: " + customer),
-            new JLabel("Total: " + total),
-            new JLabel("Date: " + date),
-            new JLabel("Order: " + displayId)
+                new JLabel("Customer: " + customer),
+                new JLabel("Total: " + total),
+                new JLabel("Date: " + date),
+                new JLabel("Order: " + displayId)
         };
         for (JLabel lbl : hdrLabels) {
             lbl.setFont(FONT_SMALL);
@@ -1633,8 +1722,11 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
         // Items table
         DefaultTableModel itemModel = new DefaultTableModel(
-            new String[]{"Product", "Qty", "Unit Price", "Line Total"}, 0) {
-            @Override public boolean isCellEditable(int r, int c) { return false; }
+                new String[] { "Product", "Qty", "Unit Price", "Line Total" }, 0) {
+            @Override
+            public boolean isCellEditable(int r, int c) {
+                return false;
+            }
         };
         JTable itemTable = new JTable(itemModel);
         itemTable.setRowHeight(30);
@@ -1646,7 +1738,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         itemTable.setGridColor(BORDER_SUBTLE);
         itemTable.setShowGrid(true);
         itemTable.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
-        // Fixed-width columns for Qty / Price / Total; Product name gets remaining space
+        // Fixed-width columns for Qty / Price / Total; Product name gets remaining
+        // space
         itemTable.getColumnModel().getColumn(1).setPreferredWidth(45);
         itemTable.getColumnModel().getColumn(1).setMaxWidth(60);
         itemTable.getColumnModel().getColumn(2).setPreferredWidth(90);
@@ -1679,25 +1772,25 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
 
         // Fetch items from DB
         String q = "SELECT p.name, oi.quantity, oi.price_at_purchase "
-            + "FROM Order_Items oi JOIN Products p ON oi.product_id = p.id "
-            + "WHERE oi.order_id = ? ORDER BY p.name";
+                + "FROM Order_Items oi JOIN Products p ON oi.product_id = p.id "
+                + "WHERE oi.order_id = ? ORDER BY p.name";
         try (java.sql.PreparedStatement stmt = productDAO.getConnection().prepareStatement(q)) {
             stmt.setString(1, fullOrderId);
             java.sql.ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                String name   = rs.getString("name");
-                int    qty    = rs.getInt("quantity");
-                double unit   = rs.getDouble("price_at_purchase");
+                String name = rs.getString("name");
+                int qty = rs.getInt("quantity");
+                double unit = rs.getDouble("price_at_purchase");
                 double lineTot = qty * unit;
-                itemModel.addRow(new Object[]{
-                    name,
-                    qty,
-                    String.format(Locale.US, "$%.2f", unit),
-                    String.format(Locale.US, "$%.2f", lineTot)
+                itemModel.addRow(new Object[] {
+                        name,
+                        qty,
+                        String.format(Locale.US, "$%.2f", unit),
+                        String.format(Locale.US, "$%.2f", lineTot)
                 });
             }
         } catch (java.sql.SQLException ex) {
-            itemModel.addRow(new Object[]{"Error loading items", "", "", ""});
+            itemModel.addRow(new Object[] { "Error loading items", "", "", "" });
         }
 
         JScrollPane iScroll = new JScrollPane(itemTable);
@@ -1723,21 +1816,22 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
     }
 
     private void refreshOrdersTable() {
-        if (ordersTableModel == null) return;
+        if (ordersTableModel == null)
+            return;
         ordersTableModel.setRowCount(0);
         String query = "SELECT o.id, u.username, o.total_amount, o.timestamp "
-            + "FROM Orders o JOIN Users u ON o.user_id = u.id ORDER BY o.timestamp DESC";
+                + "FROM Orders o JOIN Users u ON o.user_id = u.id ORDER BY o.timestamp DESC";
         try (java.sql.PreparedStatement stmt = productDAO.getConnection().prepareStatement(query);
-             java.sql.ResultSet rs = stmt.executeQuery()) {
+                java.sql.ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                String fullId  = rs.getString("id");
+                String fullId = rs.getString("id");
                 String display = fullId.length() > 10 ? fullId.substring(0, 8) + ".." : fullId;
-                ordersTableModel.addRow(new Object[]{
-                    display,
-                    rs.getString("username"),
-                    String.format(Locale.US, "$%.2f", rs.getDouble("total_amount")),
-                    rs.getTimestamp("timestamp").toString(),
-                    fullId   // hidden column ??? full UUID for detail lookup
+                ordersTableModel.addRow(new Object[] {
+                        display,
+                        rs.getString("username"),
+                        String.format(Locale.US, "$%.2f", rs.getDouble("total_amount")),
+                        rs.getTimestamp("timestamp").toString(),
+                        fullId // hidden column ??? full UUID for detail lookup
                 });
             }
         } catch (java.sql.SQLException e) {
@@ -1763,15 +1857,18 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         int stock = (int) adminStockSpinner.getValue();
 
         if (id.isEmpty() || name.isEmpty() || priceStr.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Fill in all required fields.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Fill in all required fields.", "Validation Error",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
         double price;
         try {
             price = Double.parseDouble(priceStr);
-            if (price < 0) throw new NumberFormatException();
+            if (price < 0)
+                throw new NumberFormatException();
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Price must be a valid positive number.", "Validation Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Price must be a valid positive number.", "Validation Error",
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -1782,7 +1879,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
             JOptionPane.showMessageDialog(this, "Product \"" + name + "\" updated!");
         } else {
             if (productDAO.productExists(id)) {
-                JOptionPane.showMessageDialog(this, "Product code \"" + id + "\" already exists.", "Duplicate", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Product code \"" + id + "\" already exists.", "Duplicate",
+                        JOptionPane.WARNING_MESSAGE);
                 return;
             }
             Product newProduct = new PhysicalProduct(id, name, price, stock, 1.0, "");
@@ -1796,7 +1894,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
     }
 
     private void clearAdminForm() {
-        adminIdField.setText(""); adminIdField.setEditable(true);
+        adminIdField.setText("");
+        adminIdField.setEditable(true);
         adminNameField.setText("");
         adminPriceField.setText("");
         adminStockSpinner.setValue(1);
@@ -1809,7 +1908,7 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
     private void loadImagePreview(String path) {
         if (path != null && new File(path).exists()) {
             ImageIcon icon = new ImageIcon(
-                new ImageIcon(path).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+                    new ImageIcon(path).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH));
             adminImagePreview.setIcon(icon);
             adminImagePreview.setText("");
         } else {
@@ -1834,10 +1933,9 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
                 // Units sold per product
                 Map<String, Integer> soldMap = new java.util.HashMap<>();
                 String sqlSold = "SELECT product_id, SUM(quantity) AS total_sold "
-                    + "FROM Order_Items GROUP BY product_id";
-                try (java.sql.PreparedStatement s =
-                         productDAO.getConnection().prepareStatement(sqlSold);
-                     java.sql.ResultSet rs = s.executeQuery()) {
+                        + "FROM Order_Items GROUP BY product_id";
+                try (java.sql.PreparedStatement s = productDAO.getConnection().prepareStatement(sqlSold);
+                        java.sql.ResultSet rs = s.executeQuery()) {
                     while (rs.next())
                         soldMap.put(rs.getString("product_id"), rs.getInt("total_sold"));
                 } catch (java.sql.SQLException ex) {
@@ -1845,54 +1943,55 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
                 }
 
                 // Total orders + total revenue
-                int    totalOrders  = 0;
+                int totalOrders = 0;
                 double totalRevenue = 0.0;
                 String sqlOrders = "SELECT COUNT(*) AS cnt, COALESCE(SUM(total_amount),0) AS rev FROM Orders";
-                try (java.sql.PreparedStatement s =
-                         productDAO.getConnection().prepareStatement(sqlOrders);
-                     java.sql.ResultSet rs = s.executeQuery()) {
+                try (java.sql.PreparedStatement s = productDAO.getConnection().prepareStatement(sqlOrders);
+                        java.sql.ResultSet rs = s.executeQuery()) {
                     if (rs.next()) {
-                        totalOrders  = rs.getInt("cnt");
+                        totalOrders = rs.getInt("cnt");
                         totalRevenue = rs.getDouble("rev");
                     }
                 } catch (java.sql.SQLException ex) {
                     System.err.println("Error fetching orders data: " + ex.getMessage());
                 }
 
-                return new Object[]{prods, soldMap, totalOrders, totalRevenue};
+                return new Object[] { prods, soldMap, totalOrders, totalRevenue };
             }
+
             @Override
             @SuppressWarnings("unchecked")
             protected void done() {
                 try {
-                    Object[] result      = get();
+                    Object[] result = get();
                     Map<String, Product> dbProducts = (Map<String, Product>) result[0];
-                    Map<String, Integer> soldMap    = (Map<String, Integer>)  result[1];
-                    int    totalOrders  = (int)    result[2];
+                    Map<String, Integer> soldMap = (Map<String, Integer>) result[1];
+                    int totalOrders = (int) result[2];
                     double totalRevenue = (double) result[3];
 
                     adminTableModel.setRowCount(0);
                     for (Product p : dbProducts.values()) {
                         if ("All".equals(typeName) || p.getClass().getSimpleName().equals(typeName)) {
                             int sold = soldMap.getOrDefault(p.getId(), 0);
-                            adminTableModel.addRow(new Object[]{
-                                p.getId(), p.getName(),
-                                String.format(Locale.US, "$%.2f", p.getPrice()),
-                                p.getStockQuantity(), sold
+                            adminTableModel.addRow(new Object[] {
+                                    p.getId(), p.getName(),
+                                    String.format(Locale.US, "$%.2f", p.getPrice()),
+                                    p.getStockQuantity(), sold
                             });
                         }
                     }
                     if (adminAnalyticsPanel != null)
                         adminAnalyticsPanel.setAnalyticsData(dbProducts, soldMap, totalOrders, totalRevenue);
-                } catch (Exception e) { e.printStackTrace(); }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         };
         worker.execute();
     }
 
-
     // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    //  UI HELPERS
+    // UI HELPERS
     // ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
 
     private JTextField createDarkTextField(int columns) {
@@ -1907,9 +2006,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
         field.setForeground(TEXT_PRIMARY);
         field.setCaretColor(ACCENT_CYAN);
         field.setBorder(BorderFactory.createCompoundBorder(
-            new LineBorder(BORDER_SUBTLE, 1, true),
-            new EmptyBorder(6, 10, 6, 10)
-        ));
+                new LineBorder(BORDER_SUBTLE, 1, true),
+                new EmptyBorder(6, 10, 6, 10)));
     }
 
     private JLabel createFormLabel(String text) {
@@ -1924,10 +2022,18 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
             private boolean hovered = false;
             {
                 addMouseListener(new MouseAdapter() {
-                    public void mouseEntered(MouseEvent e) { hovered = true; repaint(); }
-                    public void mouseExited(MouseEvent e) { hovered = false; repaint(); }
+                    public void mouseEntered(MouseEvent e) {
+                        hovered = true;
+                        repaint();
+                    }
+
+                    public void mouseExited(MouseEvent e) {
+                        hovered = false;
+                        repaint();
+                    }
                 });
             }
+
             @Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2 = (Graphics2D) g;
@@ -1958,7 +2064,8 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (Exception e) { }
+        } catch (Exception e) {
+        }
         SwingUtilities.invokeLater(() -> new ShoppingGUI().setVisible(true));
     }
 }
@@ -1967,280 +2074,327 @@ public class ShoppingGUI extends JFrame implements InventoryAlertListener {
  * Full-featured Analytics Dashboard Panel.
  *
  * Sections (top ??? bottom):
- *   1. Title bar
- *   2. Six stat cards (2 rows ?? 3 cols): Products | Orders | Revenue
- *                                         Stock   | Inv.Val| LowStock
- *   3. Donut chart (stock VALUE share) + single-column legend
- *   4. Horizontal bar chart: Top 10 by Units Sold
+ * 1. Title bar
+ * 2. Six stat cards (2 rows ?? 3 cols): Products | Orders | Revenue
+ * Stock | Inv.Val| LowStock
+ * 3. Donut chart (stock VALUE share) + single-column legend
+ * 4. Horizontal bar chart: Top 10 by Units Sold
  */
 class DarkPieChartPanel extends JPanel {
 
-    // ?????? data fields ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    private Map<String, Product> products  = new java.util.LinkedHashMap<>();
-    private Map<String, Integer> soldMap   = new java.util.HashMap<>();
-    private int    totalOrders  = 0;
+    // ── data fields
+    // ──────────────────────────────────────────────────────────────────────────────
+    private Map<String, Product> products = new java.util.LinkedHashMap<>();
+    private Map<String, Integer> soldMap = new java.util.HashMap<>();
+    private int totalOrders = 0;
     private double totalRevenue = 0.0;
+    private java.util.LinkedHashMap<String, double[]> dailyData = new java.util.LinkedHashMap<>();
 
-    // ?????? color palette ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    // ── color palette
+    // ────────────────────────────────────────────────────────────────────────
     private static final Color[] PALETTE = {
-        new Color(0,   150, 255), new Color(0,   230, 118), new Color(255,  69,  58),
-        new Color(255, 159,  10), new Color(175,  82, 222), new Color(0,   210, 255),
-        new Color(255, 214,  10), new Color(88,   86, 214), new Color(255,  55,  95),
-        new Color(50,  215,  75), new Color(255, 100,  50), new Color(100, 200, 255)
+            new Color(0, 150, 255), new Color(0, 230, 118), new Color(255, 69, 58),
+            new Color(255, 159, 10), new Color(175, 82, 222), new Color(0, 210, 255),
+            new Color(255, 214, 10), new Color(88, 86, 214), new Color(255, 55, 95),
+            new Color(50, 215, 75), new Color(255, 100, 50), new Color(100, 200, 255)
     };
 
-    // ?????? theme colors ???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    private static final Color BG      = new Color(28, 29, 50);
+    // ── theme colors
+    // ───────────────────────────────────────────────────────────────────────────
+    private static final Color BG = new Color(28, 29, 50);
     private static final Color CARD_BG = new Color(38, 40, 65);
-    private static final Color TEXT1   = new Color(235, 235, 245);
-    private static final Color TEXT2   = new Color(140, 140, 165);
+    private static final Color TEXT1 = new Color(235, 235, 245);
+    private static final Color TEXT2 = new Color(140, 140, 165);
     private static final Color DIVIDER = new Color(55, 57, 85);
 
-    public DarkPieChartPanel() { setBackground(BG); }
+    public DarkPieChartPanel() {
+        setBackground(BG);
+    }
 
-    /** Legacy compat ??? called from places that don't have full data yet. */
+    /** Legacy compat — called from places that don't have full data yet. */
     public void setProducts(Map<String, Product> products) {
         this.products = products != null ? products : new java.util.LinkedHashMap<>();
         repaint();
     }
 
-    /** Full data update ??? called from applyAdminFilter. */
+    /** Full data update — called from applyAdminFilter. */
     public void setAnalyticsData(Map<String, Product> products,
-                                  Map<String, Integer> soldMap,
-                                  int totalOrders, double totalRevenue) {
-        this.products     = products != null ? products : new java.util.LinkedHashMap<>();
-        this.soldMap      = soldMap  != null ? soldMap  : new java.util.HashMap<>();
-        this.totalOrders  = totalOrders;
+            Map<String, Integer> soldMap,
+            int totalOrders, double totalRevenue,
+            java.util.LinkedHashMap<String, double[]> dailyData) {
+        this.products = products != null ? products : new java.util.LinkedHashMap<>();
+        this.soldMap = soldMap != null ? soldMap : new java.util.HashMap<>();
+        this.totalOrders = totalOrders;
         this.totalRevenue = totalRevenue;
+        this.dailyData = dailyData != null ? dailyData : new java.util.LinkedHashMap<>();
         repaint();
     }
+    
+    // Legacy overload for backward compatibility if called without daily data
+    public void setAnalyticsData(Map<String, Product> products,
+            Map<String, Integer> soldMap,
+            int totalOrders, double totalRevenue) {
+        setAnalyticsData(products, soldMap, totalOrders, totalRevenue, new java.util.LinkedHashMap<>());
+    }
 
-    // ???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    // ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,      RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.setRenderingHint(RenderingHints.KEY_RENDERING,         RenderingHints.VALUE_RENDER_QUALITY);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
         int W = getWidth();
         int H = getHeight();
-        int P = 10;   // outer padding
+        int P = 15; // outer padding
 
         // Full background
         g2.setColor(BG);
         g2.fillRect(0, 0, W, H);
 
-        // ?????? 1. TITLE ??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-        g2.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        // ── 1. TITLE
+        // ──────────────────────────────────────────────────────────────────────────────
+        g2.setFont(new Font("Segoe UI", Font.BOLD, 18));
         g2.setColor(TEXT1);
         String title = "Analytics Dashboard";
         FontMetrics tf = g2.getFontMetrics();
         g2.drawString(title, (W - tf.stringWidth(title)) / 2, P + tf.getAscent());
-        int y = P + tf.getAscent() + 10;
+        int y = P + tf.getAscent() + 15;
 
-        // ?????? 2. COMPUTE METRICS ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+        // ── 2. COMPUTE METRICS
+        // ────────────────────────────────────────────────────────────────────────
         java.util.List<Product> pList = new java.util.ArrayList<>(products.values());
-        int   productCount = pList.size();
-        int   totalStock   = pList.stream().mapToInt(Product::getStockQuantity).sum();
-        double totalValue  = pList.stream().mapToDouble(p -> p.getPrice() * p.getStockQuantity()).sum();
-        long  lowStock     = pList.stream().filter(p -> p.getStockQuantity() <= 5).count();
-        int   totalSold    = soldMap.values().stream().mapToInt(Integer::intValue).sum();
+        int productCount = pList.size();
+        int totalStock = pList.stream().mapToInt(Product::getStockQuantity).sum();
+        double totalValue = pList.stream().mapToDouble(p -> p.getPrice() * p.getStockQuantity()).sum();
+        long lowStock = pList.stream().filter(p -> p.getStockQuantity() <= 5).count();
 
-        // ?????? 3. SIX STAT CARDS (2 rows ?? 3 cols) ??????????????????????????????????????????????????????????????????
+        // ── 3. SIX STAT CARDS (1 row of 6 OR 2 rows of 3)
+        // ──────────────────────────────────────────────────────────────────
         int cardCols = 3;
-        int cardGap  = 6;
-        int cardW    = (W - 2 * P - (cardCols - 1) * cardGap) / cardCols;
-        int cardH    = 54;
+        int cardGap = 10;
+        int cardW = (W - 2 * P - (cardCols - 1) * cardGap) / cardCols;
+        int cardH = 65;
 
         Object[][] cards = {
-            // {value, label, color}
-            { String.valueOf(productCount),                              "Products",       new Color(0,   150, 255) },
-            { String.valueOf(totalOrders),                               "Orders",         new Color(0,   230, 118) },
-            { String.format(Locale.US, "$%.0f", totalRevenue),          "Revenue",        new Color(255, 214,  10) },
-            { String.valueOf(totalStock),                                "Total Stock",    new Color(0,   210, 255) },
-            { String.format(Locale.US, "$%.0f", totalValue),            "Inventory Value",new Color(175,  82, 222) },
-            { String.valueOf(lowStock),                                  "Low Stock",      new Color(255,  69,  58) },
+                // {value, label, color}
+                { String.valueOf(productCount), "Products", new Color(0, 150, 255) },
+                { String.valueOf(totalOrders), "Orders", new Color(0, 230, 118) },
+                { String.format(Locale.US, "$%.0f", totalRevenue), "Revenue", new Color(255, 214, 10) },
+                { String.valueOf(totalStock), "Total Stock", new Color(0, 210, 255) },
+                { String.format(Locale.US, "$%.0f", totalValue), "Inventory Value", new Color(175, 82, 222) },
+                { String.valueOf(lowStock), "Low Stock", new Color(255, 69, 58) },
         };
 
         for (int ci = 0; ci < 6; ci++) {
             int col = ci % cardCols;
             int row = ci / cardCols;
-            int bx  = P + col * (cardW + cardGap);
-            int by  = y + row * (cardH + cardGap);
+            int bx = P + col * (cardW + cardGap);
+            int by = y + row * (cardH + cardGap);
 
             // Card background
             g2.setColor(CARD_BG);
             g2.fill(new RoundRectangle2D.Double(bx, by, cardW, cardH, 12, 12));
 
-            // Left accent bar
-            Color accent = (Color) cards[ci][2];
-            g2.setColor(accent);
-            g2.fill(new RoundRectangle2D.Double(bx, by, 3, cardH, 3, 3));
-
             // Value
-            g2.setFont(new Font("Segoe UI", Font.BOLD, 15));
-            g2.setColor(accent);
+            g2.setFont(new Font("Segoe UI", Font.BOLD, 18));
+            g2.setColor(TEXT1);
             FontMetrics vfm = g2.getFontMetrics();
             String val = (String) cards[ci][0];
-            g2.drawString(val, bx + (cardW - vfm.stringWidth(val)) / 2, by + 26);
+            g2.drawString(val, bx + (cardW - vfm.stringWidth(val)) / 2, by + 30);
 
             // Label
-            g2.setFont(new Font("Segoe UI", Font.PLAIN, 10));
+            g2.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             g2.setColor(TEXT2);
             FontMetrics lfm = g2.getFontMetrics();
             String lbl = (String) cards[ci][1];
-            g2.drawString(lbl, bx + (cardW - lfm.stringWidth(lbl)) / 2, by + 42);
+            g2.drawString(lbl, bx + (cardW - lfm.stringWidth(lbl)) / 2, by + 50);
+            
+            // Underline / Bar indicator (instead of side)
+            Color accent = (Color) cards[ci][2];
+            g2.setColor(accent);
+            g2.fill(new RoundRectangle2D.Double(bx + 20, by + cardH - 6, cardW - 40, 3, 3, 3));
         }
 
-        y += 2 * (cardH + cardGap) + 12;
-
-        if (productCount == 0) return;
-
-        // ?????? 4. SECTION: DONUT CHART + LEGEND ???????????????????????????????????????????????????????????????????????????
-        // Donut uses stock VALUE (price ?? qty) per product ??? more meaningful than raw qty
-        double totalVal = pList.stream().mapToDouble(p -> p.getPrice() * p.getStockQuantity()).sum();
-        if (totalVal <= 0) totalVal = 1;
-
-        int donutSide = Math.min(W / 2 - P * 2 - 10, 160);
-        donutSide = Math.max(donutSide, 80);
-        int donutX   = P;
-        int donutY   = y;
-
-        // Draw ALL slices by stock value
-        double angle = 0;
-        double cumVal = 0;
-        for (int i = 0; i < pList.size(); i++) {
-            Product p = pList.get(i);
-            cumVal += p.getPrice() * p.getStockQuantity();
-            int arc;
-            if (i == pList.size() - 1) {
-                arc = 360 - (int) Math.round(angle);
-            } else {
-                arc = (int) Math.round(cumVal / totalVal * 360 - angle);
-            }
-            if (arc > 0) {
-                g2.setColor(PALETTE[i % PALETTE.length]);
-                g2.fill(new Arc2D.Double(donutX, donutY, donutSide, donutSide, angle, arc, Arc2D.PIE));
-                g2.setColor(BG);
-                g2.setStroke(new java.awt.BasicStroke(1.0f));
-                g2.draw(new Arc2D.Double(donutX, donutY, donutSide, donutSide, angle, arc, Arc2D.PIE));
-                g2.setStroke(new java.awt.BasicStroke(1f));
-            }
-            angle += arc;
-        }
-        // Donut hole
-        int holeS = donutSide * 2 / 5;
-        int hx    = donutX + (donutSide - holeS) / 2;
-        int hy    = donutY + (donutSide - holeS) / 2;
-        g2.setColor(BG);
-        g2.fillOval(hx, hy, holeS, holeS);
-        g2.setColor(TEXT1);
-        g2.setFont(new Font("Segoe UI", Font.BOLD, 10));
-        FontMetrics hfm = g2.getFontMetrics();
-        String hLabel = "by value";
-        g2.drawString(hLabel, hx + (holeS - hfm.stringWidth(hLabel)) / 2,
-            hy + (holeS + hfm.getAscent()) / 2 - 2);
-
-        // Legend to the right of the donut
-        int legX    = donutX + donutSide + 12;
-        int legW    = W - legX - P;
-        int legY    = donutY;
-        int legRowH = 15;
-        int maxLeg  = Math.min(pList.size(), Math.max(1, (donutSide) / legRowH));
-
-        // Sort legend by stock value descending for the top items
-        java.util.List<Product> byVal = new java.util.ArrayList<>(pList);
-        byVal.sort((a, b) -> Double.compare(
-            b.getPrice() * b.getStockQuantity(), a.getPrice() * a.getStockQuantity()));
-
-        g2.setFont(new Font("Segoe UI", Font.PLAIN, 10));
-        FontMetrics legFm = g2.getFontMetrics();
-
-        // Build a quick index from product id ??? palette index (based on pList order)
-        java.util.Map<String, Integer> colorIdx = new java.util.HashMap<>();
-        for (int i = 0; i < pList.size(); i++) colorIdx.put(pList.get(i).getId(), i);
-
-        g2.setFont(new Font("Segoe UI", Font.BOLD, 10));
-        g2.setColor(TEXT2);
-        g2.drawString("Inventory Share", legX, legY - 2);
-        legY += 4;
-
-        g2.setFont(new Font("Segoe UI", Font.PLAIN, 10));
-        legFm = g2.getFontMetrics();
-        for (int li = 0; li < maxLeg && li < byVal.size(); li++) {
-            Product p  = byVal.get(li);
-            int     ci = colorIdx.getOrDefault(p.getId(), li);
-            double  pct = (p.getPrice() * p.getStockQuantity()) / totalVal * 100;
-
-            int ly = legY + li * legRowH;
-            // color dot
-            g2.setColor(PALETTE[ci % PALETTE.length]);
-            g2.fillRoundRect(legX, ly + 2, 7, 7, 3, 3);
-            // text
-            g2.setColor(TEXT1);
-            String name = p.getName();
-            String pctStr = String.format(Locale.US, " %.0f%%", pct);
-            while (name.length() > 2 && legFm.stringWidth(name + pctStr) > legW - 10)
-                name = name.substring(0, name.length() - 1);
-            g2.drawString(name + pctStr, legX + 10, ly + 10);
-        }
-
-        y += donutSide + 14;
-
-        // ?????? 5. DIVIDER ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+        y += 2 * (cardH + cardGap) + 10;
+        
+        // ── 4. DIVIDER
         g2.setColor(DIVIDER);
         g2.fillRect(P, y, W - 2 * P, 1);
-        y += 8;
+        y += 15;
 
-        // ?????? 6. BAR CHART: Top 10 by Units Sold ?????????????????????????????????????????????????????????????????????
-        String barTitle = totalSold > 0 ? "Top Products by Units Sold" : "Top Products by Stock Value";
-        g2.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        // ── 5. REVENUE PERFORMANCE LINE CHART 
+        // ─────────────────────────────────────────────────────────────────────
+        g2.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        g2.setColor(TEXT1);
+        g2.drawString("Revenue Performance (Last 30 Days)", P, y + g2.getFontMetrics().getAscent());
+        y += 25;
+        
+        int chartX = P;
+        int chartY = y;
+        int chartW = W - 2 * P;
+        int chartH = (H - y - P) / 2 - 10;
+        
+        if (chartH < 50 || dailyData.isEmpty()) {
+            g2.setColor(TEXT2);
+            g2.setFont(new Font("Segoe UI", Font.ITALIC, 12));
+            g2.drawString("Not enough data to display chart.", chartX + 10, chartY + 20);
+            return;
+        }
+
+        // Draw Chart Background
+        g2.setColor(new Color(35, 37, 60));
+        g2.fill(new RoundRectangle2D.Double(chartX, chartY, chartW, chartH, 12, 12));
+        
+        int padding = 40;
+        int graphW = chartW - padding * 2;
+        int graphH = chartH - padding * 2;
+        int graphX = chartX + padding;
+        int graphY = chartY + padding;
+
+        // Find max revenue
+        double maxRev = 0;
+        for (double[] data : dailyData.values()) {
+            if (data[1] > maxRev) maxRev = data[1];
+        }
+        
+        // Ensure maxRev is at least some number so we don't divide by 0 and scales cleanly
+        maxRev = Math.max(maxRev, 100);
+        // Round maxRev up to nearest 100 for grid
+        maxRev = Math.ceil(maxRev / 100.0) * 100.0;
+        
+        // Draw grid and Y labels
+        g2.setColor(new Color(255, 255, 255, 20)); // Faint lines
+        g2.setFont(new Font("Segoe UI", Font.PLAIN, 9));
+        FontMetrics fm = g2.getFontMetrics();
+        
+        int gridLines = 4;
+        for (int i = 0; i <= gridLines; i++) {
+            int lineY = graphY + graphH - (i * graphH / gridLines);
+            g2.drawLine(graphX, lineY, graphX + graphW, lineY);
+            
+            String label = "$" + (int)(maxRev * i / gridLines);
+            g2.setColor(TEXT2);
+            g2.drawString(label, graphX - fm.stringWidth(label) - 5, lineY + fm.getAscent() / 2);
+            g2.setColor(new Color(255, 255, 255, 20));
+        }
+        
+        // Draw the line and gradient fill
+        int numPoints = dailyData.size();
+        int[] xPoints = new int[numPoints + 2];
+        int[] yPoints = new int[numPoints + 2];
+        
+        java.util.List<String> keys = new java.util.ArrayList<>(dailyData.keySet());
+        
+        for (int i = 0; i < numPoints; i++) {
+            String key = keys.get(i);
+            double rev = dailyData.get(key)[1];
+            
+            xPoints[i + 1] = graphX + (numPoints > 1 ? (i * graphW / (numPoints - 1)) : graphW / 2);
+            yPoints[i + 1] = graphY + graphH - (int)((rev / maxRev) * graphH);
+            
+            // X labels (draw a max of 7 labels)
+            if (i % Math.max(1, numPoints / 7) == 0 || i == numPoints - 1) {
+                // Try to make label MM-DD
+                String[] parts = key.split("-");
+                String label = parts.length == 3 ? parts[1] + "-" + parts[2] : key;
+                g2.setColor(TEXT2);
+                g2.drawString(label, xPoints[i + 1] - fm.stringWidth(label) / 2, graphY + graphH + 15);
+            }
+        }
+        
+        // close the polygon for the gradient fill
+        xPoints[0] = xPoints[1];
+        yPoints[0] = graphY + graphH;
+        xPoints[numPoints + 1] = xPoints[numPoints];
+        yPoints[numPoints + 1] = graphY + graphH;
+        
+        // Gradient Fill
+        Color gradientStart = new Color(0, 210, 255, 80);
+        Color gradientEnd = new Color(175, 82, 222, 10);
+        java.awt.GradientPaint gp = new java.awt.GradientPaint(
+                graphX, graphY, gradientStart, 
+                graphX, graphY + graphH, gradientEnd);
+        g2.setPaint(gp);
+        g2.fillPolygon(xPoints, yPoints, numPoints + 2);
+        
+        // Draw the main line
+        g2.setPaint(null);
+        g2.setColor(new Color(0, 210, 255)); // Bright Cyan/Blue line
+        g2.setStroke(new java.awt.BasicStroke(2.5f, java.awt.BasicStroke.CAP_ROUND, java.awt.BasicStroke.JOIN_ROUND));
+        for (int i = 1; i < numPoints; i++) {
+            // Draw segment by segment to color blend if we want, but single color is fine
+            // We use the interior points of the arrays
+            g2.drawLine(xPoints[i], yPoints[i], xPoints[i+1], yPoints[i+1]);
+        }
+        
+        // Draw points
+        g2.setColor(Color.WHITE);
+        g2.setStroke(new java.awt.BasicStroke(1.5f));
+        for (int i = 1; i <= numPoints; i++) {
+            g2.fillOval(xPoints[i] - 3, yPoints[i] - 3, 6, 6);
+            g2.setColor(new Color(175, 82, 222));
+            g2.drawOval(xPoints[i] - 3, yPoints[i] - 3, 6, 6);
+            g2.setColor(Color.WHITE);
+        }
+        
+        y += chartH + 25;
+
+        // ── 6. BAR CHART: Top Products by Units Sold
+        // ─────────────────────────────────────────────────────────────────────
+        String barTitle = "Top Products by Units Sold";
+        g2.setFont(new Font("Segoe UI", Font.BOLD, 14));
         g2.setColor(TEXT1);
         g2.drawString(barTitle, P, y + g2.getFontMetrics().getAscent());
-        y += g2.getFontMetrics().getAscent() + 6;
+        y += g2.getFontMetrics().getAscent() + 15;
 
         // Build top-10 list
         java.util.List<Product> barList = new java.util.ArrayList<>(pList);
+        int totalSold = soldMap.values().stream().mapToInt(Integer::intValue).sum();
         if (totalSold > 0) {
             barList.sort((a, b) -> Integer.compare(
-                soldMap.getOrDefault(b.getId(), 0),
-                soldMap.getOrDefault(a.getId(), 0)));
+                    soldMap.getOrDefault(b.getId(), 0),
+                    soldMap.getOrDefault(a.getId(), 0)));
         } else {
             barList.sort((a, b) -> Double.compare(
-                b.getPrice() * b.getStockQuantity(),
-                a.getPrice() * a.getStockQuantity()));
+                    b.getPrice() * b.getStockQuantity(),
+                    a.getPrice() * a.getStockQuantity()));
         }
         int barItems = Math.min(barList.size(), 10);
 
-        int namW    = 110;          // fixed name column
-        int valW    = 44;           // fixed value column
+        int namW = 160; // fixed name column
+        int valW = 44; // fixed value column
         int barArea = W - 2 * P - namW - valW - 8;
-        int barH    = 14;
-        int barGap  = 6;
+        int barH = 14;
+        int barGap = 8;
 
         // Max value for scaling
         double maxBar = 1;
         for (int bi = 0; bi < barItems; bi++) {
             Product p = barList.get(bi);
             double v = totalSold > 0 ? soldMap.getOrDefault(p.getId(), 0)
-                                     : p.getPrice() * p.getStockQuantity();
+                    : p.getPrice() * p.getStockQuantity();
             maxBar = Math.max(maxBar, v);
         }
 
+        // Build a quick index from product id -> palette index
+        java.util.Map<String, Integer> colorIdx = new java.util.HashMap<>();
+        for (int i = 0; i < pList.size(); i++) colorIdx.put(pList.get(i).getId(), i);
+
         for (int bi = 0; bi < barItems; bi++) {
-            Product p    = barList.get(bi);
-            double  val  = totalSold > 0 ? soldMap.getOrDefault(p.getId(), 0)
-                                         : p.getPrice() * p.getStockQuantity();
-            int     ci   = colorIdx.getOrDefault(p.getId(), bi);
-            Color   bc   = PALETTE[ci % PALETTE.length];
+            Product p = barList.get(bi);
+            double val = totalSold > 0 ? soldMap.getOrDefault(p.getId(), 0)
+                    : p.getPrice() * p.getStockQuantity();
+            int ci = colorIdx.getOrDefault(p.getId(), bi);
+            Color bc = PALETTE[ci % PALETTE.length];
 
             int bx = P;
             int by = y + bi * (barH + barGap);
 
             // Name
-            g2.setFont(new Font("Segoe UI", Font.PLAIN, 10));
+            g2.setFont(new Font("Segoe UI", Font.PLAIN, 11));
             g2.setColor(TEXT2);
             FontMetrics nfm = g2.getFontMetrics();
             String nm = p.getName();
@@ -2256,23 +2410,23 @@ class DarkPieChartPanel extends JPanel {
             g2.fillRoundRect(barX, by + 2, barArea, barH - 4, 6, 6);
 
             // Bar fill with gradient
-            java.awt.GradientPaint gp = new java.awt.GradientPaint(
-                barX, by, bc, barX + barW, by, bc.darker());
-            g2.setPaint(gp);
+            java.awt.GradientPaint gp2 = new java.awt.GradientPaint(
+                    barX, by, bc, barX + barW, by, bc.darker());
+            g2.setPaint(gp2);
             g2.fillRoundRect(barX, by + 2, barW, barH - 4, 6, 6);
             g2.setPaint(null);
 
             // Value label
             String valStr = totalSold > 0
-                ? String.valueOf((int) val)
-                : String.format(Locale.US, "$%.0f", val);
-            g2.setFont(new Font("Segoe UI", Font.BOLD, 10));
+                    ? String.valueOf((int) val)
+                    : String.format(Locale.US, "$%.0f", val);
+            g2.setFont(new Font("Segoe UI", Font.BOLD, 11));
             g2.setColor(TEXT1);
-            FontMetrics vfm2 = g2.getFontMetrics();
-            g2.drawString(valStr, barX + barArea + 4, by + barH - 2);
+            g2.drawString(valStr, barX + barArea + 8, by + barH - 2);
 
             // Check if we'd overflow
-            if (by + barH + barGap + 10 > H) break;
+            if (by + barH + barGap + 10 > H)
+                break;
         }
     }
 }
